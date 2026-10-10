@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+.env.*
+*.log
+artifacts/
+results/
+.runtime/
+__pycache__/
