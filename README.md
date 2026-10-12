@@ -1,5 +1,17 @@
 # fault-probe-agent-v4
 
+> **English summary**
+>
+> Solo entry for the [GOSIM 2026 Agentic Observer Hackathon](https://create.gosim.org/survey26/), in which an agent runs a survey telescope's night shift and picks the next observation every 15 simulated minutes. This agent placed **3rd of 102 teams** on the hidden final cards ([final results](https://create.gosim.org/survey26/platform/final-results), team 迷星叫).
+>
+> Design in brief:
+>
+> - **Rules for scheduling.** Observation planning is deterministic code ([`src/core/planner.ts`](src/core/planner.ts)).
+> - **Fault watch with probes.** Instrument faults are inferred from exposure scores and public bulletins; when the throughput estimate collapses and nothing explains it, the agent spends one short probe exposure to measure again instead of staying idle ([`src/faults/watch.ts`](src/faults/watch.ts), [`src/agent.ts`](src/agent.ts)).
+> - **A model only for free text.** An LLM reads free-text handover notes and returns structured facts; validation and time-zone arithmetic stay in code, and if the model is unavailable the agent carries on by its ordinary rules ([`src/handover/`](src/handover)).
+>
+> The rest of this README is in Chinese and describes what changed in v4.
+
 `fault-probe-agent-v4` 是 GOSIM 2026 Agentic Observer 项目中的一个参赛者自有智能体版本。这个独立仓库只包含运行该版本所需的参赛者源码和配置，不包含官方平台仓库、任务卡、评测代码、运行记录、密钥或可选本地模型权重。
 
 ## v4 方法
